@@ -13,7 +13,7 @@ Unity Engine에 Photon Fusion 라이브러리를 적용한 멀티 FPS 게임
 
 ### 영상 및 기술
   * 영상 : [https://www.youtube.com/watch?v=0RxNQm55yUs](https://www.youtube.com/watch?app=desktop&v=_MKxYMPifSg&feature=youtu.be)
-  * 빌드 파일 : 
+  * 기술서 : https://acrobat.adobe.com/id/urn:aaid:sc:ap:936531f6-f059-472f-91a6-fe3c5161f0ac
 
 <hr></hr>
 
@@ -28,6 +28,6 @@ Unity Engine 기반으로 제작한 쿼터뷰 생존 탈출 게임
 
 ### 영상 및 기술
   * 영상 : https://www.youtube.com/watch?v=0RxNQm55yUs
-  * 빌드 파일 : 
+  * 기술서 : 
 
 ### 프로젝트 파일이 없어져서 빌드 파일과 영상만 업로드 하겠습니다...
