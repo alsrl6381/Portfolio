@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+//총알 갯수 UI
 public class BulletUI : MonoBehaviour
 {
     private TextMeshProUGUI currentBullet;
