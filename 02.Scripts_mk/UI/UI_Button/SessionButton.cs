@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+//ë°©ì— ì°¸ì—¬ í›„ ì¤€ë¹„,íŒ€ ë³€ê²½,ë‚˜ê°€ê¸° ê¸°ëŠ¥ì„ ë‹´ë‹¹í•˜ëŠ” ê¸°ëŠ¥
 public class SessionButton : MonoBehaviour
 {
     public Button StartOrReadyBtn;
@@ -24,7 +25,7 @@ public class SessionButton : MonoBehaviour
         ExitBtn.onClick.AddListener(() => { ExitSession(); });
     }
 
-    //ÃÊ±âÈ­ StartOrReadyInit()ÇÔ¼öµµ È£Ãâ ÇÏ¿© ÁØºñ¿Ï·á ¹× ½ÃÀÛÇÏ±â ¹öÆ°À» ¼³Á¤ ÇÔ
+    //ì´ˆê¸°í™” StartOrReadyInit()í•¨ìˆ˜ë„ í˜¸ì¶œ í•˜ì—¬ ì¤€ë¹„ì™„ë£Œ ë° ì‹œì‘í•˜ê¸° ë²„íŠ¼ì„ ì„¤ì • í•¨
     public IEnumerator Init()
     {
         yield return new WaitForFixedUpdate();
@@ -34,40 +35,40 @@ public class SessionButton : MonoBehaviour
         StartOrReadyInit();
     }
 
-    //ÆÀ º¯°æ ¹öÆ° Å¬¸¯ ½Ã ½ÇÇà
+    //íŒ€ ë³€ê²½ ë²„íŠ¼ í´ë¦­ ì‹œ ì‹¤í–‰
     public void ChangeTeam()
     {
         sessionManager.TeamChange(FusionConnection.instance.runner.LocalPlayer);
         sessionManager.UpdatePlayerListUIRpc();
     }
 
-    //¹æ ³ª°¡±â ¹öÆ° ´­·¶À» ½Ã ½ÇÇà
+    //ë°© ë‚˜ê°€ê¸° ë²„íŠ¼ ëˆŒë €ì„ ì‹œ ì‹¤í–‰
     public void ExitSession()
     {
         sessionManager.DeleteNameFromDictionaryRpc(FusionConnection.instance.runner.LocalPlayer);
         StartCoroutine(Exit());
     }
 
-    //µñ¼Å³Ê¸®¿¡¼­ ÇÃ·¹ÀÌ¾î¸¦ »èÁ¦ ÇÑ ÈÄ 1ÃÊ µÚ¿¡ ¼­¹ö¸¦ ³ª°¨
+    //ë”•ì…”ë„ˆë¦¬ì—ì„œ í”Œë ˆì´ì–´ë¥¼ ì‚­ì œ í•œ í›„ 1ì´ˆ ë’¤ì— ì„œë²„ë¥¼ ë‚˜ê°
     IEnumerator Exit()
     {
         yield return new WaitForSeconds(1f);
         FusionConnection.instance.runner.Shutdown();
     }
 
-    //³»°¡ ¹æÀåÀÌ¶ó¸é ½ÃÀÛÇÏ±â ¹öÆ°°ú ½ÃÀÛÇÏ±â ±â´É | ¾Æ´Ï¶ó¸é ÁØºñÇÏ±â ¹öÆ°°ú ÁØºñÇÏ±â ±â´ÉÀ¸·Î ¼³Á¤ÇÔ
+    //ë‚´ê°€ ë°©ì¥ì´ë¼ë©´ ì‹œì‘í•˜ê¸° ë²„íŠ¼ê³¼ ì‹œì‘í•˜ê¸° ê¸°ëŠ¥ | ì•„ë‹ˆë¼ë©´ ì¤€ë¹„í•˜ê¸° ë²„íŠ¼ê³¼ ì¤€ë¹„í•˜ê¸° ê¸°ëŠ¥ìœ¼ë¡œ ì„¤ì •í•¨
     public void StartOrReadyInit()
     {
         StartOrReadyBtn.onClick.RemoveAllListeners();
 
         if (playerObject.GetComponent<UserData>().isRoomMaster)
         {
-            StartOrReadyBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "½ÃÀÛÇÏ±â";
+            StartOrReadyBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "ì‹œì‘í•˜ê¸°";
             StartOrReadyBtn.onClick.AddListener(() => { sessionManager.EnterGameRpc(); });
         }
         else
         {
-            StartOrReadyBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "ÁØºñÇÏ±â";
+            StartOrReadyBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "ì¤€ë¹„í•˜ê¸°";
             StartOrReadyBtn.onClick.AddListener(() => { playerObject.GetComponent<UserData>().Ready(); });
         }
     }
