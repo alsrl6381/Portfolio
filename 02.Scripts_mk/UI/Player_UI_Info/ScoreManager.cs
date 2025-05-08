@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//ì ìˆ˜ UIë¥¼ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
 public class ScoreManager : MonoBehaviour
 {
     private TextMeshProUGUI RedScore;
@@ -82,26 +83,26 @@ public class ScoreManager : MonoBehaviour
 
         if(state == States.Ready)
         {
-            State.text = "ÁØºñ";
+            State.text = "ì¤€ë¹„";
             StartCoroutine(DisablePanelDelay(2f));
         }
         if(state == States.Start)
         {
-            State.text = "°ÔÀÓ ½ÃÀÛ";
+            State.text = "ê²Œì„ ì‹œì‘";
             StartCoroutine(DisablePanelDelay(2f));
         }
         if(state == States.Bomb)
         {
-            State.text = "ÆøÆÄ¹° ¼³Ä¡";
+            State.text = "í­íŒŒë¬¼ ì„¤ì¹˜";
             StartCoroutine(DisablePanelDelay(2f));
         }
         if (state == States.Red)
         {
-            State.text = "·¹µåÆÀ ½Â¸®";
+            State.text = "ë ˆë“œíŒ€ ìŠ¹ë¦¬";
         }
         if(state == States.Blue)
         {
-            State.text = "ºí·çÆÀ ½Â¸®";
+            State.text = "ë¸”ë£¨íŒ€ ìŠ¹ë¦¬";
         }
     }
 
