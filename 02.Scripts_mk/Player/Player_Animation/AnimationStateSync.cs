@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace Animations
 {
+    //네트워크 환경에서 애니메이션 동기화를 위해서 보간 기능을 적용하고
+    //실시간으로 업데이트를 통해서 싱크를 맞춰주는 기능
     public class AnimationStateSync : NetworkBehaviour
     {
         // PRIVATE MEMBERS
