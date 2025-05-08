@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//누가 누구를 죽였는지 표시하는 UI
 public class Kill_Log : MonoBehaviour
 {
     private TextMeshProUGUI killer;
