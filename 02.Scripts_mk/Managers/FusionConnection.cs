@@ -6,36 +6,37 @@ using System;
 using Photon.Voice.Fusion;         
 using UnityEngine.SceneManagement;
 
+//ì‹¤ì œ ì„œë²„ì— ì ‘ì†í•˜ê³  ìœ ì €ê°€ ì„œë²„ì™€ ìƒí˜¸ì‘ìš©ì„ í–ˆì„ ë•Œ ë°œìƒí•˜ëŠ” ì½œë°± í•¨ìˆ˜ë¥¼ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
 public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
 {
     public static FusionConnection instance;
 
     #region Reference
-    [Header("Runner Reference")] //¼­¹ö¿Í »ç¿îµå¿¡ °ü·ÃµÈ µ¥ÀÌÅÍµé
+    [Header("Runner Reference")] //ì„œë²„ì™€ ì‚¬ìš´ë“œì— ê´€ë ¨ëœ ë°ì´í„°ë“¤
     [SerializeField] GameObject runnerObject;
     [SerializeField] Photon.Voice.Unity.Recorder recorder;
     [SerializeField] GameObject speaker;
     [HideInInspector] public NetworkRunner runner;
     [HideInInspector] public FusionVoiceClient voiceClient;
 
-    [Header("Player Reference")] //ÇÃ·¹ÀÌ¾î¿Í °ü·ÃµÈ µ¥ÀÌÅÍµé
+    [Header("Player Reference")] //í”Œë ˆì´ì–´ì™€ ê´€ë ¨ëœ ë°ì´í„°ë“¤
     [SerializeField] NetworkObject playerPrefab;
     [HideInInspector] public NetworkString<_32> _playerName = null;
     [HideInInspector] public NetworkObject playerObject;
     #endregion
 
 
-    //°¢Á¾ ¸Å´ÏÀúµé
+    //ê°ì¢… ë§¤ë‹ˆì €ë“¤
     #region Manager 
-    [Header("Session List Manager")] //¹æ ¸ñ·Ï °ü·Ã ¸Å´ÏÀú
+    [Header("Session List Manager")] //ë°© ëª©ë¡ ê´€ë ¨ ë§¤ë‹ˆì €
     [SerializeField] GameObject sessionListManagerPrefab;
     [HideInInspector] public SessionListManager _sessionListManager;
 
-    [Header("Session Manager")] //¹æ ³»ºÎ Á¤º¸¸¦ ´Ù·ç´Â ¸Å´ÏÀú
+    [Header("Session Manager")] //ë°© ë‚´ë¶€ ì •ë³´ë¥¼ ë‹¤ë£¨ëŠ” ë§¤ë‹ˆì €
     [SerializeField] GameObject sessionManagerPrefab;
     [HideInInspector] public SessionManager _sessionManager;
 
-    [Header("Select Manager")] //Ä³¸¯ÅÍ ¼±ÅÃ È­¸é¿¡ ´ëÇÑ ¸Å´ÏÀú
+    [Header("Select Manager")] //ìºë¦­í„° ì„ íƒ í™”ë©´ì— ëŒ€í•œ ë§¤ë‹ˆì €
     [SerializeField] GameObject selectManager;
     [HideInInspector] public SelectManager _selectManager;
 
@@ -54,12 +55,12 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     }
 
     
-    //¼­¹ö¿¡ Á¢¼Ó ¹æ ¸ñ·ÏµéÀ» º¼ ¼ö ÀÖÀ½
+    //ì„œë²„ì— ì ‘ì† ë°© ëª©ë¡ë“¤ì„ ë³¼ ìˆ˜ ìˆìŒ
     public void ConnectToLobby(string playerName)
     {
         _playerName = playerName;
 
-        //ruuner°¡ ¾øÀ¸¸é ÃÊ±âÈ­
+        //ruunerê°€ ì—†ìœ¼ë©´ ì´ˆê¸°í™”
         if (runner == null)
         {
             runner = gameObject.AddComponent<NetworkRunner>();
@@ -73,13 +74,13 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
         _sessionListManager.EnterSession();
     }
 
-    //¼¼¼Ç¿¡ Á¢¼Ó - °ÔÀÓ ¹æ¿¡ µé¾î°¡´Â °Í°ú µ¿ÀÏ
+    //ì„¸ì…˜ì— ì ‘ì† - ê²Œì„ ë°©ì— ë“¤ì–´ê°€ëŠ” ê²ƒê³¼ ë™ì¼
     public async void ConnectToSession(string sessionName)
     {
-        //¹æ ¸ñ·Ï UI ¾ø¾Ö±â
+        //ë°© ëª©ë¡ UI ì—†ì• ê¸°
         _sessionListManager.SessionListDisable();
 
-        //ruuner°¡ ¾øÀ¸¸é ÃÊ±âÈ­
+        //ruunerê°€ ì—†ìœ¼ë©´ ì´ˆê¸°í™”
         if (runner == null)
         {
             runner = gameObject.AddComponent<NetworkRunner>();
@@ -90,23 +91,23 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
         
         await runner.StartGame(new StartGameArgs()
         {
-            GameMode = GameMode.Shared, //°ÔÀÓ ¸ğµå¸¦ °øÀ¯¸ğµå·Î ¼³Á¤
-            SessionName = sessionName, //¼¼¼Ç ÀÌ¸§À» ¼³Á¤ 
+            GameMode = GameMode.Shared, //ê²Œì„ ëª¨ë“œë¥¼ ê³µìœ ëª¨ë“œë¡œ ì„¤ì •
+            SessionName = sessionName, //ì„¸ì…˜ ì´ë¦„ì„ ì„¤ì • 
         });
 
         voiceClient.ConnectAndJoinRoom();
     }
 
-    //¹æ ¸¸µé±â
+    //ë°© ë§Œë“¤ê¸°
     public async void CreatSession()
     {
-        //¹æ ¸ñ·Ï UI ¾ø¾Ö±â
+        //ë°© ëª©ë¡ UI ì—†ì• ê¸°
         _sessionListManager.SessionListDisable();
         string title = _sessionListManager.ReturnTitle();
 
         string randomSessionName;
 
-        //¹æ »ı¼º ½Ã ÀÌ¸§À» ÀûÁö ¾Ê¾ÒÀ¸¸é ·£´ı »ı¼º | Àû¾ú´Ù¸é ±× ÀÌ¸§À¸·Î
+        //ë°© ìƒì„± ì‹œ ì´ë¦„ì„ ì ì§€ ì•Šì•˜ìœ¼ë©´ ëœë¤ ìƒì„± | ì ì—ˆë‹¤ë©´ ê·¸ ì´ë¦„ìœ¼ë¡œ
         if (title == "")
         {
             int randomInt = UnityEngine.Random.Range(1000, 9999);
@@ -118,7 +119,7 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
         }
         _sessionListManager.CloseCreateSession();
 
-        //ruuner°¡ ¾øÀ¸¸é ÃÊ±âÈ­
+        //ruunerê°€ ì—†ìœ¼ë©´ ì´ˆê¸°í™”
         if (runner == null)
         {
             runner = gameObject.AddComponent<NetworkRunner>();
@@ -127,13 +128,13 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
             voiceClient.SpeakerPrefab = Resources.Load<GameObject>("[Speaker]");
         }
 
-        //°ÔÀÓÀ» ½ÃÀÛÇÔ
+        //ê²Œì„ì„ ì‹œì‘í•¨
         await runner.StartGame(new StartGameArgs()
         {
-            GameMode = GameMode.Shared, //°ÔÀÓ ¸ğµå¸¦ °øÀ¯¸ğµå·Î ¼³Á¤
-            SessionName = randomSessionName, //¼¼¼Ç ÀÌ¸§À» ¼³Á¤ 
-            // Scene = 3, ¾ÀÀÇ ÀÎµ¦½º¸¦ Á¤ÇØÁÙ ¶§
-            PlayerCount = 4, //ÀÔÀå °¡´ÉÇÑ ÇÃ·¹ÀÌ¾îÀÇ ¼ö
+            GameMode = GameMode.Shared, //ê²Œì„ ëª¨ë“œë¥¼ ê³µìœ ëª¨ë“œë¡œ ì„¤ì •
+            SessionName = randomSessionName, //ì„¸ì…˜ ì´ë¦„ì„ ì„¤ì • 
+            // Scene = 3, ì”¬ì˜ ì¸ë±ìŠ¤ë¥¼ ì •í•´ì¤„ ë•Œ
+            PlayerCount = 4, //ì…ì¥ ê°€ëŠ¥í•œ í”Œë ˆì´ì–´ì˜ ìˆ˜
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
             
         });
@@ -142,7 +143,7 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     }
 
     #region CallBack Method
-    //Á¢¼ÓÀÚ¸¸ ½ÇÇà
+    //ì ‘ì†ìë§Œ ì‹¤í–‰
     public void OnConnectedToServer(NetworkRunner runner)
     {
     }
@@ -183,9 +184,9 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     {
         if (SceneManager.GetActiveScene().name == "StartScene")
         {
-            CreatePlayerNManager(player); //ÇÃ·¹ÀÌ¾î¿Í sessionManager¸¦ »ı¼ºÇÔ
+            CreatePlayerNManager(player); //í”Œë ˆì´ì–´ì™€ sessionManagerë¥¼ ìƒì„±í•¨
             _sessionManager.SetRoomName(runner.SessionInfo.Name);
-            StartCoroutine(_sessionManager.UpdatePlayerListUI()); //UIµéÀ» Àç¹èÄ¡ ÇÔ 
+            StartCoroutine(_sessionManager.UpdatePlayerListUI()); //UIë“¤ì„ ì¬ë°°ì¹˜ í•¨ 
         }
     }
    
@@ -193,9 +194,9 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     {
         if (SceneManager.GetActiveScene().name == "StartScene")
         {
-            _sessionManager.ChangeRoomMaster(); //¹æÀåÀÌ ¹Ù²ï °ÍÀ» ¼³Á¤ÇØÁÜ
-            _sessionManager.DeleteNameFromDictionaryRpc(player); //sessionManagerÀÇ µñ¼Å³Ê¸®¿¡¼­ ÇØ´ç ÇÃ·¹ÀÌ¾î¸¦ Á¦°Å
-            StartCoroutine(_sessionManager.UpdatePlayerListUI()); //UIµéÀ» Àç¹èÄ¡ ÇÔ
+            _sessionManager.ChangeRoomMaster(); //ë°©ì¥ì´ ë°”ë€ ê²ƒì„ ì„¤ì •í•´ì¤Œ
+            _sessionManager.DeleteNameFromDictionaryRpc(player); //sessionManagerì˜ ë”•ì…”ë„ˆë¦¬ì—ì„œ í•´ë‹¹ í”Œë ˆì´ì–´ë¥¼ ì œê±°
+            StartCoroutine(_sessionManager.UpdatePlayerListUI()); //UIë“¤ì„ ì¬ë°°ì¹˜ í•¨
         }
     }
 
@@ -224,17 +225,17 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     {
         if (SceneManager.GetActiveScene().name == "StartScene")
         {
-            if (runner != null) //¹æÀ» ³ª°¡¸é ¼­¹ö°¡ ³ª°¡Áö¹Ç·Î ÀÌ¹Ì ÀÖ´ø °ÍµéÀ» ´Ù ÆÄ±«ÇÏ°í ¼­¹ö¸¦ »õ·Î Á¢¼Ó
+            if (runner != null) //ë°©ì„ ë‚˜ê°€ë©´ ì„œë²„ê°€ ë‚˜ê°€ì§€ë¯€ë¡œ ì´ë¯¸ ìˆë˜ ê²ƒë“¤ì„ ë‹¤ íŒŒê´´í•˜ê³  ì„œë²„ë¥¼ ìƒˆë¡œ ì ‘ì†
             {
                 Destroy(voiceClient);
                 Destroy(runner);
             }
             if (_sessionManager != null)
             {
-                _sessionManager.ExitRoom(); //panel ²ô±â 
+                _sessionManager.ExitRoom(); //panel ë„ê¸° 
             }
-            _sessionListManager.RefreshSessionListUI(); //»õ·Î°íÄ§ ¹öÆ°
-            ConnectToLobby(_playerName.ToString()); //·Îºñ¿¡ Á¢¼Ó
+            _sessionListManager.RefreshSessionListUI(); //ìƒˆë¡œê³ ì¹¨ ë²„íŠ¼
+            ConnectToLobby(_playerName.ToString()); //ë¡œë¹„ì— ì ‘ì†
         }
     }
 
@@ -244,7 +245,7 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
     }
     #endregion
 
-    //¼¼¼Ç¿¡¼­ ÇÊ¿äÇÑ ¸Å´ÏÀú¿Í ÇÃ·¹ÀÌ¾î¸¦ ¸¸µç´Ù.
+    //ì„¸ì…˜ì—ì„œ í•„ìš”í•œ ë§¤ë‹ˆì €ì™€ í”Œë ˆì´ì–´ë¥¼ ë§Œë“ ë‹¤.
     void CreatePlayerNManager(PlayerRef player)
     {
         _sessionManager = FindObjectOfType<SessionManager>();
@@ -260,7 +261,7 @@ public class FusionConnection : MonoBehaviour,INetworkRunnerCallbacks
         }   
     }
 
-    //¼¿·ºÆ® ¸Å´ÏÀú »ı¼ºÇÏ±â
+    //ì…€ë ‰íŠ¸ ë§¤ë‹ˆì € ìƒì„±í•˜ê¸°
     public void CreateSelectManager()
     {
         _selectManager = runner.Spawn(selectManager).GetComponent<SelectManager>();
