@@ -6,19 +6,21 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 
+
+//ìœ ì €ì˜ ë°ì´í„° ë³€ê²½ì´ ë˜ì—ˆì„ ë•Œ ì‹¤ì‹œê°„ìœ¼ë¡œ ë‹¤ë¥¸ ìœ ì €ì—ê²Œ ë™ê¸°í™” ì‹œì¼œì£¼ëŠ” ê¸°ëŠ¥
 public class UserData : NetworkBehaviour
 {
-    //ÇÃ·¹ÀÌ¾î ÀÌ¸§, ¹æÀå ¿©ºÎ, ÁØºñ ¿Ï·á ¿©ºÎ, ÆÀ ¿©ºÎ µî µ¥ÀÌÅÍ º¯°æ ½Ã ÇÔ¼ö°¡ ½ÇÇàµÇ´Â °Íµé
+    //í”Œë ˆì´ì–´ ì´ë¦„, ë°©ì¥ ì—¬ë¶€, ì¤€ë¹„ ì™„ë£Œ ì—¬ë¶€, íŒ€ ì—¬ë¶€ ë“± ë°ì´í„° ë³€ê²½ ì‹œ í•¨ìˆ˜ê°€ ì‹¤í–‰ë˜ëŠ” ê²ƒë“¤
     [Networked(OnChanged = nameof(UpdateName))] public NetworkString<_32> PlayerName { get; set; }
     [Networked] public bool isRoomMaster { get; set; }
     [Networked(OnChanged = nameof(UpdateReadyState))] public bool isReady { get; set; }
     [Networked(OnChanged = nameof(UpdateMyTeam))] public Team WhereTeam { get { return team; } set { } }
 
-    //Ã¤ÆÃ ¹× º¸ÀÌ½º ±â´É
+    //ì±„íŒ… ë° ë³´ì´ìŠ¤ ê¸°ëŠ¥
     public ChattingManager chattingManager;
     public PushToTalk voiceController;
 
-    //ÆÀ Á¤º¸¸¦ enum Å¸ÀÔÀ¸·Î ¹ŞÀ½
+    //íŒ€ ì •ë³´ë¥¼ enum íƒ€ì…ìœ¼ë¡œ ë°›ìŒ
     public enum Team
     {
         Default,
@@ -41,10 +43,10 @@ public class UserData : NetworkBehaviour
         set { characterIndex = value; } 
     }
 
-    //ÀÌ¸§À» ¶ç¿ï TMPro
+    //ì´ë¦„ì„ ë„ìš¸ TMPro
     [SerializeField] TextMeshPro playerNameLabel;
 
-    //»ı¼º ½Ã ½ÇÇà
+    //ìƒì„± ì‹œ ì‹¤í–‰
     public override void Spawned()
     {
         if (this.HasStateAuthority)
@@ -64,26 +66,26 @@ public class UserData : NetworkBehaviour
     {
         var instance = FusionConnection.instance;
 
-        //ÇöÀç sessionManager ÇÔ¼ö¸¦ È£ÃâÇÏ¿© ÆÀÀ» ¼³Á¤
+        //í˜„ì¬ sessionManager í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ì—¬ íŒ€ì„ ì„¤ì •
         WhereTeam = instance._sessionManager.PlayerTeamSetting();
 
         DontDestroyOnLoad(this);
     }
 
-    //ÀÏ´Ü ÇöÀç´Â ³×ÀÓ ¶óº§À» ¾È¾²°í ÀÖÀ¸¹Ç·Î ÁÖ¼®Ã³¸®
+    //ì¼ë‹¨ í˜„ì¬ëŠ” ë„¤ì„ ë¼ë²¨ì„ ì•ˆì“°ê³  ìˆìœ¼ë¯€ë¡œ ì£¼ì„ì²˜ë¦¬
     protected static void UpdateName(Changed<UserData> changed)
     {
        // changed.Behaviour.playerNameLabel.text = changed.Behaviour.PlayerName.ToString();
     }
 
-    //ÁØºñ¿Ï·á ¹öÆ°À» ´©¸£¸é UI¸¦ µ¿±âÈ­ ½ÃÄÑÁÜ
+    //ì¤€ë¹„ì™„ë£Œ ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ UIë¥¼ ë™ê¸°í™” ì‹œì¼œì¤Œ
     protected static void UpdateReadyState(Changed<UserData> changed)
     {
         if(SceneManager.GetActiveScene().name == "StartScene")
         FusionConnection.instance._sessionManager.UpdatePlayerListUIRpc();
     }
 
-    //ÆÀÀÌ º¯°æµÇ¸é chattingManager¿¡ MyTeamÀ» º¯°æ
+    //íŒ€ì´ ë³€ê²½ë˜ë©´ chattingManagerì— MyTeamì„ ë³€ê²½
     protected static void UpdateMyTeam(Changed<UserData> changed)
     {
         changed.Behaviour.chattingManager.team = changed.Behaviour.WhereTeam;
