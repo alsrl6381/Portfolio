@@ -7,9 +7,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
 
+//í”Œë ˆì´ì–´ê°€ ë°©ì„ ë§Œë“¤ê±°ë‚˜ ì¡°ì¸ í–ˆì„ ë•Œ ìƒê¸°ëŠ” ë°©ì˜ ë³€í™”(ì„¸ì…˜)ì„ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
 public class SessionListManager : MonoBehaviour
 {
-    //sessionList°ü·Ã UI ¹× sessionInfo¿¡ ´ëÇÑ Á¤º¸¸¦ ¹ŞÀ» List   
+    //sessionListê´€ë ¨ UI ë° sessionInfoì— ëŒ€í•œ ì •ë³´ë¥¼ ë°›ì„ List   
     private List<SessionInfo> sessions = new List<SessionInfo>();
     [SerializeField] private GameObject sessionListCanvas;
     [SerializeField] private Transform sessionListContent;
@@ -20,7 +21,7 @@ public class SessionListManager : MonoBehaviour
     [SerializeField] private GameObject sessionEntryPrefab;
     [SerializeField] private Button confirmButton;
 
-    //ÃÊ±âÈ­ UIµéÀ» ¼³Á¤ÇØÁÜ
+    //ì´ˆê¸°í™” UIë“¤ì„ ì„¤ì •í•´ì¤Œ
     public void Start()
     {
         /*
@@ -42,20 +43,20 @@ public class SessionListManager : MonoBehaviour
         FusionConnection.instance.CreatSession();
     }
 
-    // titlePanelÅ°±â
+    // titlePanelí‚¤ê¸°
     public void OpenCreateSession()
     {
         titlePanel.SetActive(true);
     }
 
-    // titlePanelÅ°±â
+    // titlePanelí‚¤ê¸°
     public void CloseCreateSession()
     {
         titleText.text = "";
         titlePanel.SetActive(false);
     }
 
-    // Á¦¸ñ ¹İÈ¯ÇÏ±â ¹æ »ı¼º ½Ã ¹æ Á¦¸ñÀ» °¡Á®¿È
+    // ì œëª© ë°˜í™˜í•˜ê¸° ë°© ìƒì„± ì‹œ ë°© ì œëª©ì„ ê°€ì ¸ì˜´
     public string ReturnTitle()
     {
         if(!titleText.text.IsNullOrEmpty())
@@ -68,28 +69,28 @@ public class SessionListManager : MonoBehaviour
         }
     }
 
-    //·Îºñ¿¡ Á¢¼ÓÇÒ ¶§
+    //ë¡œë¹„ì— ì ‘ì†í•  ë•Œ
     public void EnterSession()
     {
         StartCoroutine(SessionListUIDelay());
     }
 
-    //·Îºñ Á¢¼Ó ½Ã ¼­¹ö°¡ ¿¬°áµÇ´Â ½Ã°£À» ±â´Ù¸²
+    //ë¡œë¹„ ì ‘ì† ì‹œ ì„œë²„ê°€ ì—°ê²°ë˜ëŠ” ì‹œê°„ì„ ê¸°ë‹¤ë¦¼
     IEnumerator SessionListUIDelay()
     {
-        //·Îºñ¿¡ ÀÔÀåÇÏ±â Àü¿¡ ¼­¹ö°¡ Á¢¼Ó µÇ´Â ½Ã°£À» ÁÖ¾î¾ß ÇÔ ³ªÁß¿¡ ·ÎµùÈ­¸éÀ¸·Î Ã³¸®
+        //ë¡œë¹„ì— ì…ì¥í•˜ê¸° ì „ì— ì„œë²„ê°€ ì ‘ì† ë˜ëŠ” ì‹œê°„ì„ ì£¼ì–´ì•¼ í•¨ ë‚˜ì¤‘ì— ë¡œë”©í™”ë©´ìœ¼ë¡œ ì²˜ë¦¬
         yield return new WaitForSeconds(5f);
         RefreshSessionListUI();
         sessionListCanvas.SetActive(true);
     }
 
-    //¼¼¼Ç ¸®½ºÆ® Äµ¹ö½º ²ô±â
+    //ì„¸ì…˜ ë¦¬ìŠ¤íŠ¸ ìº”ë²„ìŠ¤ ë„ê¸°
     public void SessionListDisable()
     {
         sessionListCanvas.SetActive(false);
     }
 
-    //¼¼¼Ç Á¤º¸°¡ ¾÷µ¥ÀÌÆ® µÇ¾úÀ» ¶§ Á¤º¸¸¦ ¹Ş¾Æ¿È
+    //ì„¸ì…˜ ì •ë³´ê°€ ì—…ë°ì´íŠ¸ ë˜ì—ˆì„ ë•Œ ì •ë³´ë¥¼ ë°›ì•„ì˜´
     public void ListUpdated(List<SessionInfo> sessionList)
     {
         sessions.Clear();
@@ -98,10 +99,10 @@ public class SessionListManager : MonoBehaviour
         RefreshSessionListUI();
     }
 
-    //»õ·Î°íÄ§ ¹öÆ°
+    //ìƒˆë¡œê³ ì¹¨ ë²„íŠ¼
     public void RefreshSessionListUI()
     {
-        //»õ·Î °íÄ§À» À§ÇØ ±âÁ¸ ¼¼¼ÇµéÀ» »èÁ¦
+        //ìƒˆë¡œ ê³ ì¹¨ì„ ìœ„í•´ ê¸°ì¡´ ì„¸ì…˜ë“¤ì„ ì‚­ì œ
         foreach (Transform child in sessionListContent)
         {
             Destroy(child.gameObject);
