@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+//ìì‹ ì´ ìƒì„±í•œ ë£¸ì— ëŒ€í•œ ì„¸ë¶€ ì •ë³´ë¥¼ ê´€ë¦¬í•¨
 public class SessionManager : NetworkBehaviour
 {
     [Header("UI")]
@@ -14,32 +14,32 @@ public class SessionManager : NetworkBehaviour
     [SerializeField] GameObject playerNameLabelUI;
     [SerializeField] private GameObject roomNameText;
 
-    //[Network]´Â °øÀ¯ÇØ¾ß ÇÏ´Â µ¥ÀÌÅÍ°¡ ÀÖ´Ù¸é ¼³Á¤ÇØÁÜ
+    //[Network]ëŠ” ê³µìœ í•´ì•¼ í•˜ëŠ” ë°ì´í„°ê°€ ìˆë‹¤ë©´ ì„¤ì •í•´ì¤Œ
 
-    //½ºÅ©¸³ÅÍºí ¿ÀºêÁ§Æ® »ç¿ë °¡´É¼º ÀÖÀ½
-    //Dictionary¿¡ ¹æ¿¡ Á¢¼ÓÇÑ ÇÃ·¹ÀÌ¾îµéÀ» ÀúÀå
+    //ìŠ¤í¬ë¦½í„°ë¸” ì˜¤ë¸Œì íŠ¸ ì‚¬ìš© ê°€ëŠ¥ì„± ìˆìŒ
+    //Dictionaryì— ë°©ì— ì ‘ì†í•œ í”Œë ˆì´ì–´ë“¤ì„ ì €ì¥
     [Networked]
     [Capacity(4)]
     public NetworkDictionary<PlayerRef, UserData> NetPlayerDic { get; }
 
-    //ÆÀ Ä«¿îÆ®
+    //íŒ€ ì¹´ìš´íŠ¸
     [Networked] public int RedTeamCount { get; set; }
     [Networked] public int BlueTeamCount { get; set; }
 
-    //[Rpc]¸¦ »ç¿ëÇÏ¿© ´Ù¸¥ ÇÃ·¹ÀÌ¾îµé¿¡°Ô ÇØ´ç ÇÔ¼ö¸¦ ½ÇÇàÇÏ¶ó°í ¾Ë¸²
+    //[Rpc]ë¥¼ ì‚¬ìš©í•˜ì—¬ ë‹¤ë¥¸ í”Œë ˆì´ì–´ë“¤ì—ê²Œ í•´ë‹¹ í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•˜ë¼ê³  ì•Œë¦¼
     #region Rpc Method List
     [Rpc(RpcSources.All,RpcTargets.All)] 
-    public void UpdatePlayerListUIRpc() //°»½ÅµÈ ÇÃ·¹ÀÌ¾î ¸®½ºÆ®·Î UIµéÀ» ´Ù½Ã ¹èÄ¡ÇÔ
+    public void UpdatePlayerListUIRpc() //ê°±ì‹ ëœ í”Œë ˆì´ì–´ ë¦¬ìŠ¤íŠ¸ë¡œ UIë“¤ì„ ë‹¤ì‹œ ë°°ì¹˜í•¨
     {
         StartCoroutine(UpdatePlayerListUI());
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void AddToDictionaryRpc(PlayerRef playerRef, UserData stats) //DIctionary¿¡ »õ·Î µé¾î¿Â ÇÃ·¹ÀÌ¾î Ãß°¡
+    public void AddToDictionaryRpc(PlayerRef playerRef, UserData stats) //DIctionaryì— ìƒˆë¡œ ë“¤ì–´ì˜¨ í”Œë ˆì´ì–´ ì¶”ê°€
     {
         if (NetPlayerDic.ContainsKey(playerRef))
         {
-            Debug.Log("ÀÌ¹Ì °°Àº ÀÌ¸§ÀÌ ÀÖ½À´Ï´Ù.");
+            Debug.Log("ì´ë¯¸ ê°™ì€ ì´ë¦„ì´ ìˆìŠµë‹ˆë‹¤.");
         }
         else
         {
@@ -48,7 +48,7 @@ public class SessionManager : NetworkBehaviour
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void DeleteNameFromDictionaryRpc(PlayerRef playerRef) //Dictionary¿¡ ³ª°£ ÇÃ·¹ÀÌ¾î Á¦°Å
+    public void DeleteNameFromDictionaryRpc(PlayerRef playerRef) //Dictionaryì— ë‚˜ê°„ í”Œë ˆì´ì–´ ì œê±°
     {
         if (NetPlayerDic.ContainsKey(playerRef))
         {
@@ -61,7 +61,7 @@ public class SessionManager : NetworkBehaviour
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void EnterGameRpc() //°ÔÀÓ ½ÃÀÛ ½Ã ¾À ÀÌµ¿
+    public void EnterGameRpc() //ê²Œì„ ì‹œì‘ ì‹œ ì”¬ ì´ë™
     {
         if (isStartable())
         {
@@ -71,13 +71,13 @@ public class SessionManager : NetworkBehaviour
         }
         else
         {
-            Debug.Log("ÁØºñ°¡ µÇÁö ¾ÊÀº ÇÃ·¹ÀÌ¾î°¡ ÀÖ½À´Ï´Ù.");
+            Debug.Log("ì¤€ë¹„ê°€ ë˜ì§€ ì•Šì€ í”Œë ˆì´ì–´ê°€ ìˆìŠµë‹ˆë‹¤.");
         }
     }
 
-    //Ã¹ ¹øÂ° ÇÃ·¡±×°¡ 0ÀÌ¸é ·¹µå ÆÀ Ä«¿îÆ® / 1ÀÌ¸é ºí·çÆÀ / µÎ ¹øÂ° ÇÃ·¡±×°¡ true¸é ¹İ´ëÆÀ Ä«¿îÆ® ¸¶ÀÌ³Ê½º
+    //ì²« ë²ˆì§¸ í”Œë˜ê·¸ê°€ 0ì´ë©´ ë ˆë“œ íŒ€ ì¹´ìš´íŠ¸ / 1ì´ë©´ ë¸”ë£¨íŒ€ / ë‘ ë²ˆì§¸ í”Œë˜ê·¸ê°€ trueë©´ ë°˜ëŒ€íŒ€ ì¹´ìš´íŠ¸ ë§ˆì´ë„ˆìŠ¤
     [Rpc(RpcSources.All,RpcTargets.All)]
-    public void ChangeTeamCountRpc(int _flag_1,bool _flag_2 = false) //ÇÃ·¹ÀÌ¾î°¡ »õ·Î µé¾î¿À°Å³ª ÆÀ º¯°æ ½Ã ÆÀ Ä«¿îÆ® º¯°æ
+    public void ChangeTeamCountRpc(int _flag_1,bool _flag_2 = false) //í”Œë ˆì´ì–´ê°€ ìƒˆë¡œ ë“¤ì–´ì˜¤ê±°ë‚˜ íŒ€ ë³€ê²½ ì‹œ íŒ€ ì¹´ìš´íŠ¸ ë³€ê²½
     {
         if(_flag_1 == 0)
         {
@@ -92,8 +92,8 @@ public class SessionManager : NetworkBehaviour
     }
  #endregion
 
-    //Instatiate·Î Äµ¹ö½º »ı¼º
-    //ÇØ´ç ½ºÅ©¸³Æ®°¡ »ı¼ºµÇ¸é ½ÇÇà 
+    //Instatiateë¡œ ìº”ë²„ìŠ¤ ìƒì„±
+    //í•´ë‹¹ ìŠ¤í¬ë¦½íŠ¸ê°€ ìƒì„±ë˜ë©´ ì‹¤í–‰ 
     public override void Spawned()
     {
         //sessionCanvas = GameObject.Find("Session Canvas");
@@ -113,7 +113,7 @@ public class SessionManager : NetworkBehaviour
         DontDestroyOnLoad(this);
     }
 
-    //ÇÃ·¹ÀÌ¾î°¡ ¹æ¿¡ Á¢¼Ó ½Ã ÇØ´ç ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ ÆÀÀ» ÁöÁ¤ÇØÁÜ 
+    //í”Œë ˆì´ì–´ê°€ ë°©ì— ì ‘ì† ì‹œ í•´ë‹¹ í•´ë‹¹ í”Œë ˆì´ì–´ì˜ íŒ€ì„ ì§€ì •í•´ì¤Œ 
     public UserData.Team PlayerTeamSetting()
     {
         if(RedTeamCount <= BlueTeamCount)
@@ -128,7 +128,7 @@ public class SessionManager : NetworkBehaviour
         }
     }
     
-    //ÆÀ º¯°æ ¹öÆ° ´­·¶À» ¶§ ½ÇÇà ÇÒ ±â´É
+    //íŒ€ ë³€ê²½ ë²„íŠ¼ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ í•  ê¸°ëŠ¥
     public void TeamChange(PlayerRef player)
     {
         if (NetPlayerDic.ContainsKey(player))
@@ -154,7 +154,7 @@ public class SessionManager : NetworkBehaviour
         roomNameText.GetComponent<TextMeshProUGUI>().text = name;
     }
 
-    //¸®½ºÆ®¸¦ »õ·Î °»½ÅÇÏ°í UI¸¦ ÃÊ±âÈ­ ÇÔ
+    //ë¦¬ìŠ¤íŠ¸ë¥¼ ìƒˆë¡œ ê°±ì‹ í•˜ê³  UIë¥¼ ì´ˆê¸°í™” í•¨
     public IEnumerator UpdatePlayerListUI()
     {
         if (sessionCanvas.activeSelf == false)
@@ -197,13 +197,13 @@ public class SessionManager : NetworkBehaviour
         }
     }
 
-    //PanelÀ» ²û 
+    //Panelì„ ë” 
     public void ExitRoom()
     {
         sessionCanvas.SetActive(false);
     }
 
-    //¸ğµç ÇÃ·¹ÀÌ¾î°¡ ÁØºñ¿Ï·á°¡ µÇ¾ú´Ù¸é ½ÃÀÛ ÇÒ ¼ö ÀÖ°Ô True¸¦ ¸®ÅÏÇÔ
+    //ëª¨ë“  í”Œë ˆì´ì–´ê°€ ì¤€ë¹„ì™„ë£Œê°€ ë˜ì—ˆë‹¤ë©´ ì‹œì‘ í•  ìˆ˜ ìˆê²Œ Trueë¥¼ ë¦¬í„´í•¨
     public bool isStartable()
     {
         foreach (KeyValuePair<PlayerRef, UserData> items in NetPlayerDic)
@@ -219,12 +219,12 @@ public class SessionManager : NetworkBehaviour
         return true;
     }
     
-    //¹æÀåÀÌ ¹Ù²î¾úÀ¸¸é RoomMaster¸¦ true·Î ¹Ù²Ù°í ÁØºñ¿Ï·á ¹öÆ°À» ½ÃÀÛ¹öÆ°À¸·Î º¯°æ
+    //ë°©ì¥ì´ ë°”ë€Œì—ˆìœ¼ë©´ RoomMasterë¥¼ trueë¡œ ë°”ê¾¸ê³  ì¤€ë¹„ì™„ë£Œ ë²„íŠ¼ì„ ì‹œì‘ë²„íŠ¼ìœ¼ë¡œ ë³€ê²½
     public void ChangeRoomMaster()
     {
         if(HasStateAuthority)
         {
-            //¸¸¾à ±ÇÇÑÀ» °¡Áö°í ÀÖ´Ù¸é ¹æÀåÀÌ´Ù.
+            //ë§Œì•½ ê¶Œí•œì„ ê°€ì§€ê³  ìˆë‹¤ë©´ ë°©ì¥ì´ë‹¤.
             NetPlayerDic[Runner.LocalPlayer].isRoomMaster = true;
             NetPlayerDic[Runner.LocalPlayer].isReady = false;
             FindObjectOfType<SessionButton>().StartOrReadyInit();
