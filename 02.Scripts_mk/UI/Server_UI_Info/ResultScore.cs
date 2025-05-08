@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UserData;
 
+//맞춘 부위,미션 완료 등 플레이어의 기록을 저장하고 마지막에 보여주는 기능 
 public class ResultScore : NetworkBehaviour
 {
     public static ResultScore instance;
@@ -30,11 +31,11 @@ public class ResultScore : NetworkBehaviour
     {
         if (team == Team.Red)
         {
-            UserDatas[player].Team = "������";
+            UserDatas[player].Team = "°ø°ÝÆÀ";
         }
         else
         {
-            UserDatas[player].Team = "������";
+            UserDatas[player].Team = "¼öºñÆÀ";
         }
         
     }
