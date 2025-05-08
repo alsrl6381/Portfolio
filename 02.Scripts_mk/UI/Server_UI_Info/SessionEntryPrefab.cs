@@ -5,13 +5,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+//방을 클릭 했을 때 참여하는 기능 
 public class SessionEntryPrefab : MonoBehaviour
 {
     public TextMeshProUGUI sessionName;
     public TextMeshProUGUI playerCount;
     public Button joinButton;
 
-    //�濡 
+    //¹æ¿¡ 
     private void Awake()
     {
         joinButton.onClick.AddListener(JoinSession);
