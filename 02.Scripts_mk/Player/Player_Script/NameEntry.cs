@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
 
+//ì„œë²„ì— ì ‘ì†í•  ë•Œ ìì‹ ì˜ ì´ë¦„ì„ ì‘ì„±í•˜ëŠ” ê¸°ëŠ¥
 public class NameEntry : MonoBehaviour
 {
-    //UI °ü·Ã Á¤º¸
+    //UI ê´€ë ¨ ì •ë³´
     [SerializeField] TMP_InputField nameInputField;
     [SerializeField] Button submitButton;
     [SerializeField] GameObject canvas;
@@ -18,7 +19,7 @@ public class NameEntry : MonoBehaviour
         nameInputField.characterLimit = 6;
     }
 
-    //ÀÌ¸§À» ÀûÀº ÈÄ Á¦ÃâÇÏ±â ´©¸¦ ¶§
+    //ì´ë¦„ì„ ì ì€ í›„ ì œì¶œí•˜ê¸° ëˆ„ë¥¼ ë•Œ
     public void SubmitName()
     {
         if(nameInputField.text.IsNullOrEmpty())
@@ -31,7 +32,7 @@ public class NameEntry : MonoBehaviour
         canvas.SetActive(false);
     }
 
-    //¹öÆ° È°¼ºÈ­ ½ÃÅ°±â
+    //ë²„íŠ¼ í™œì„±í™” ì‹œí‚¤ê¸°
     public void ActivateButton()
     {
         submitButton.interactable = true;
