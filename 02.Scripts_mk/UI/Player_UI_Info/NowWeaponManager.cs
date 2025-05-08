@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//무기를 교체할 때 마다 현재 장착 중인 무기 UI를 관리하는 매니저 
 public class NowWeaponManager : MonoBehaviour
 {
     private List<Transform> primary = new List<Transform>();
