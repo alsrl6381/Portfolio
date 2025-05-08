@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//플레이어 체력과 방어를 관리하는 UI
 public class PlayerUI : MonoBehaviour
 {
     private List<Transform> StatUI = new List<Transform>();
