@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using WebSocketSharp;
 using static UserData;
 
+//í”Œë ˆì´ì–´ê°„ ì±„íŒ…ì„ ì…ë ¥í•˜ê³  ì±„íŒ… ë‚´ìš©ì„ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
 public class ChattingManager : NetworkBehaviour
 {
     [Header("UI")]
@@ -20,12 +21,12 @@ public class ChattingManager : NetworkBehaviour
     [Networked(OnChanged = nameof(IsChatState))]
     public bool isChatOn { get; set; }
 
-    //³»°¡ Ä£ Ã¤ÆÃÀ» ÀúÀåÇØ³õ´Â Queue | ÇÃ·¹ÀÌ¾î ÀÌ¸§ | ÆÀ Ã¤ÆÃÀÎÁö ¾Æ´ÑÁö È®ÀÎÇÏ´Â bool°ª
+    //ë‚´ê°€ ì¹œ ì±„íŒ…ì„ ì €ì¥í•´ë†“ëŠ” Queue | í”Œë ˆì´ì–´ ì´ë¦„ | íŒ€ ì±„íŒ…ì¸ì§€ ì•„ë‹Œì§€ í™•ì¸í•˜ëŠ” boolê°’
     private Queue<string> chatTextQueue = new Queue<string>();
     private NetworkString<_32> playerName;
     private bool isTeamChat;
 
-    //³» ÆÀ Á¤º¸¸¦ ´ãÀ» °´Ã¼ | ±×¸®°í Ç¥½ÃÇØÁÖ´Â Text
+    //ë‚´ íŒ€ ì •ë³´ë¥¼ ë‹´ì„ ê°ì²´ | ê·¸ë¦¬ê³  í‘œì‹œí•´ì£¼ëŠ” Text
     public static UserData.Team myTeam;
     public UserData.Team team;
     public GameObject TextStatePanel;
@@ -52,7 +53,7 @@ public class ChattingManager : NetworkBehaviour
 
     private void Start()
     {
-        //ÃÊ±âÈ­
+        //ì´ˆê¸°í™”
         playerName = transform.root.GetComponent<UserData>().PlayerName;
 
         if (HasStateAuthority)
@@ -70,7 +71,7 @@ public class ChattingManager : NetworkBehaviour
         StartCoroutine(SetMyTeam());
     }
 
-    //ÆÀ ¼³Á¤ÇØÁÖ±â ÄÚ·çÆ¾À¸·Î ÇÏÁö ¾ÊÀ¸¸é ÇÃ·¹ÀÌ¾î°¡ »ı¼ºµÇ°í ÆÀÀÌ ºÎ¿©µÇ±â Àü¿¡ ½ÇÇàµÇ¹Ç·Î LateUpdateÈÄ¿¡ ½ÇÇà
+    //íŒ€ ì„¤ì •í•´ì£¼ê¸° ì½”ë£¨í‹´ìœ¼ë¡œ í•˜ì§€ ì•Šìœ¼ë©´ í”Œë ˆì´ì–´ê°€ ìƒì„±ë˜ê³  íŒ€ì´ ë¶€ì—¬ë˜ê¸° ì „ì— ì‹¤í–‰ë˜ë¯€ë¡œ LateUpdateí›„ì— ì‹¤í–‰
     IEnumerator SetMyTeam()
     {
         yield return new LateUpdate();
@@ -81,7 +82,7 @@ public class ChattingManager : NetworkBehaviour
         }
     }
 
-    //ÆÀÀÌ º¯°æµÇ¸é ÀÚ½ÅÀÇ ÆÀÀ» ÃÊ±âÈ­
+    //íŒ€ì´ ë³€ê²½ë˜ë©´ ìì‹ ì˜ íŒ€ì„ ì´ˆê¸°í™”
     public void ResetMyTeam()
     {
         if (HasStateAuthority)
@@ -98,7 +99,7 @@ public class ChattingManager : NetworkBehaviour
         GUI_Manager.instance.ChatOn = changed.Behaviour.isChatOn;
     }
 
-    //ÀüÃ¼ Ã¤ÆÃ ÅØ½ºÆ®°¡ º¯°æµÇ¸é ½ÇÇà
+    //ì „ì²´ ì±„íŒ… í…ìŠ¤íŠ¸ê°€ ë³€ê²½ë˜ë©´ ì‹¤í–‰
     protected static void LastPublicChatChanged(Changed<ChattingManager> changed)
     {
         string name = changed.Behaviour.playerName.ToString();
@@ -115,7 +116,7 @@ public class ChattingManager : NetworkBehaviour
         }
     }
 
-    //ÆÀ Ã¤ÆÃÀÌ º¯°æµÇ¸é ½ÇÇà
+    //íŒ€ ì±„íŒ…ì´ ë³€ê²½ë˜ë©´ ì‹¤í–‰
     protected static void LastTeamChatChanged(Changed<ChattingManager> changed)
     {
         if (myTeam != changed.Behaviour.team)
@@ -141,7 +142,7 @@ public class ChattingManager : NetworkBehaviour
         }
     }
 
-    //Ã¤ÆÃ º¸³»±â
+    //ì±„íŒ… ë³´ë‚´ê¸°
     private void SendChat()
     {
         if (!chatEntryInput.text.IsNullOrEmpty())
@@ -173,7 +174,7 @@ public class ChattingManager : NetworkBehaviour
         chatEntryInput.DeactivateInputField();
     }
 
-    //Ã¤ÆÃ ½ÃÀÛÇÏ±â
+    //ì±„íŒ… ì‹œì‘í•˜ê¸°
     private void StartChat()
     {
         chatEntryCanvas.SetActive(true);
