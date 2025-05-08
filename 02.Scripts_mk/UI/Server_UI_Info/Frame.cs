@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+//현재 게임이 몇 프레임인지 표시하는 UI
 public class Frame : MonoBehaviour
 {
 
