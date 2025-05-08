@@ -10,9 +10,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//í”Œë ˆì´ì–´ê°€ ë£¸ ì¡°ì¸ í›„ ê²Œì„ ì‹œì‘í–ˆì„ ë•Œ ìºë¦­í„°ë¥¼ ê³ ë¥´ëŠ” ê¸°ëŠ¥ë“¤ì„ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
 public class SelectManager : NetworkBehaviour
 {
-    //ÇÃ·¹ÀÌ¾î ¼ıÀÚ
+    //í”Œë ˆì´ì–´ ìˆ«ì
     public int playerCount = 4;
 
     public bool isConfirm = false;
@@ -21,32 +22,32 @@ public class SelectManager : NetworkBehaviour
 
     GameObject SelectPanel;
 
-    //myPortraitÀÇ ºÎ¸ğ°¡ µÇ´Â ÆĞ³Î
+    //myPortraitì˜ ë¶€ëª¨ê°€ ë˜ëŠ” íŒ¨ë„
     private GameObject UserLayOut;
 
-    // playerPortrait ÇÁ¸®ÆÕ ¹× ÀúÀå ÇÒ °´Ã¼
+    // playerPortrait í”„ë¦¬íŒ¹ ë° ì €ì¥ í•  ê°ì²´
     [SerializeField] private GameObject PlayerPortrait;
     private NetworkObject myPortrait;
 
-    // ³» UserData
+    // ë‚´ UserData
     private UserData myUserData;
 
-    //¹öÆ° °ü·Ã Á¤º¸
+    //ë²„íŠ¼ ê´€ë ¨ ì •ë³´
     List<Button> buttons = new List<Button>();
     List<bool> selectableButtons = new List<bool>();
     private int currentBtnIndex;
     private Button ConfirmButton;
 
-    //¾À ÀÌ¸§ | ÇöÀç ¹öÆ° ÀÎµ¦½º (³»°¡ ¼±ÅÃÇÑ ¹öÆ°)
+    //ì”¬ ì´ë¦„ | í˜„ì¬ ë²„íŠ¼ ì¸ë±ìŠ¤ (ë‚´ê°€ ì„ íƒí•œ ë²„íŠ¼)
     private string sceneName;
 
-    //½Ã°£ °ü·Ã Á¤º¸
+    //ì‹œê°„ ê´€ë ¨ ì •ë³´
     [SerializeField] private float TimeLength = 500f;
     [Networked] private TickTimer timer { get; set; }
     private TextMeshProUGUI TimeText;
 
     #region Rpc List
-    [Rpc(RpcSources.All, RpcTargets.All)] //¿ŞÂÊ¿¡ ÇÃ·¹ÀÌ¾î Á¤º¸¸¦ ¸¸µé°í PlayerPanel¿¡ ³Ö´Â ÀÛ¾÷À» ¸ğµÎ¿¡°Ô Àü´Ş / Index´Â ÇÃ·¹ÀÌ¾î ¹è¿­ÀÇ ¼ø¼­ ±¸º°ÇÏ±â À§ÇØ »ç¿ë 
+    [Rpc(RpcSources.All, RpcTargets.All)] //ì™¼ìª½ì— í”Œë ˆì´ì–´ ì •ë³´ë¥¼ ë§Œë“¤ê³  PlayerPanelì— ë„£ëŠ” ì‘ì—…ì„ ëª¨ë‘ì—ê²Œ ì „ë‹¬ / IndexëŠ” í”Œë ˆì´ì–´ ë°°ì—´ì˜ ìˆœì„œ êµ¬ë³„í•˜ê¸° ìœ„í•´ ì‚¬ìš© 
     public void SetParentPortraitRpc(NetworkObject obj, string name, string _sceneName, int index)
     {
        
@@ -60,7 +61,7 @@ public class SelectManager : NetworkBehaviour
         StartCoroutine(SortingDelay(obj));
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)] //ÇÃ·¹ÀÌ¾î°¡ Å¬¸¯ ÇØ¼­ Á¤º¸¸¦ º¯°æÇÒ ½Ã ¸ğµç ÇÃ·¹ÀÌ¾î¿¡°Ô Àü´Ş
+    [Rpc(RpcSources.All, RpcTargets.All)] //í”Œë ˆì´ì–´ê°€ í´ë¦­ í•´ì„œ ì •ë³´ë¥¼ ë³€ê²½í•  ì‹œ ëª¨ë“  í”Œë ˆì´ì–´ì—ê²Œ ì „ë‹¬
     public void ChangePortraitRpc(NetworkObject obj, int previous, int next, string _sceneName)
     {
 
@@ -95,7 +96,7 @@ public class SelectManager : NetworkBehaviour
     }
     #endregion
 
-    //¿ÜºÎ ½ºÅ©¸³Æ®¿¡¼­ Rpc È£Ãâ ÇÒ ‹š
+    //ì™¸ë¶€ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ Rpc í˜¸ì¶œ í•  Â‹Âš
     public void ChangePortrait(int next)
     {
         if (isConfirm) return;
@@ -136,10 +137,10 @@ public class SelectManager : NetworkBehaviour
         timer = TickTimer.CreateFromSeconds(Runner, time);
     }
 
-    //º¯¼ö ¼¼ÆÃ
+    //ë³€ìˆ˜ ì„¸íŒ…
     public override void Spawned()
     {                                     
-        //UI Ã£±â
+        //UI ì°¾ê¸°
         selectCanvas = FindObjectOfType<SelectCanvas>();
 
         SelectPanel = selectCanvas.SelectPanel;
@@ -148,7 +149,7 @@ public class SelectManager : NetworkBehaviour
         TimeText = selectCanvas.TimeText;
 
 
-        //¹öÆ° Ã£±â
+        //ë²„íŠ¼ ì°¾ê¸°
         foreach (Transform btn in SelectPanel.GetComponentsInChildren<Transform>())
         {
             if (btn != SelectPanel.transform)
@@ -158,18 +159,18 @@ public class SelectManager : NetworkBehaviour
             }
         }
         
-        //ÇöÀç ¼±ÅÃ ¹öÆ° , ÇöÀç ¼±ÅÃ °¡´ÉÇÑ ¹öÆ° ¸®½ºÆ®
+        //í˜„ì¬ ì„ íƒ ë²„íŠ¼ , í˜„ì¬ ì„ íƒ ê°€ëŠ¥í•œ ë²„íŠ¼ ë¦¬ìŠ¤íŠ¸
         currentBtnIndex = -1;
 
         sceneName = SceneManager.GetActiveScene().name;
 
-        //È®Á¤ ¹öÆ°
+        //í™•ì • ë²„íŠ¼
         ConfirmButton.onClick.AddListener(() => { Confirm(); });
 
         DontDestroyOnLoad(this);
     }
 
-    //ÃÊ»óÈ­ ¹× º¸ÀÌ½º ¼¼ÆÃ
+    //ì´ˆìƒí™” ë° ë³´ì´ìŠ¤ ì„¸íŒ…
     private void Start()
     {
         if(!HasStateAuthority)
@@ -177,7 +178,7 @@ public class SelectManager : NetworkBehaviour
             return;
         }
 
-        //¸ğµç ÇÃ·¹ÀÌ¾î Á¤º¸¸¦ °¡Á®¿Í¼­ ¹İº¹ÇÏ´Âµ¥ ¸¸¾à ÇØ´ç ÇÃ·¹ÀÌ¾î°¡ ³» °ÍÀÌ¶ó¸é ½ÇÇà
+        //ëª¨ë“  í”Œë ˆì´ì–´ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ ë°˜ë³µí•˜ëŠ”ë° ë§Œì•½ í•´ë‹¹ í”Œë ˆì´ì–´ê°€ ë‚´ ê²ƒì´ë¼ë©´ ì‹¤í–‰
         UserData[] playerList = new UserData[playerCount];
         playerList = FindObjectsOfType<UserData>();
 
@@ -189,13 +190,13 @@ public class SelectManager : NetworkBehaviour
             {
                 myUserData = player;
                 myPortrait = Runner.Spawn(PlayerPortrait);
-                myPortrait.GetComponent<PortraitData>().Mark.text = "³ª";
+                myPortrait.GetComponent<PortraitData>().Mark.text = "ë‚˜";
                 player.voiceController.EnterTeamVoice();
                 SetParentPortraitRpc(myPortrait, player.PlayerName.ToString(),sceneName,i);
             }
         }
 
-        //Å¸ÀÌ¸Ó »ı¼º
+        //íƒ€ì´ë¨¸ ìƒì„±
         timer = TickTimer.CreateFromSeconds(Runner,TimeLength);
     }
 
@@ -210,13 +211,13 @@ public class SelectManager : NetworkBehaviour
             string minute = string.Format("{0:00}", time / 60);
             string second = string.Format("{0:00}", time % 60);
 
-            TimeText.text = "³²Àº ½Ã°£ " + minute.ToString() + " : " + second.ToString();
+            TimeText.text = "ë‚¨ì€ ì‹œê°„ " + minute.ToString() + " : " + second.ToString();
            // timeText.text = time.ToString();
         }
 
         if (timer.Expired(Runner))
         {
-            // ÇÑ ¹øµµ ¼±ÅÃÇÏÁö ¾Ê¾Ò´Ù¸é 
+            // í•œ ë²ˆë„ ì„ íƒí•˜ì§€ ì•Šì•˜ë‹¤ë©´ 
             if (currentBtnIndex == -1)
             {
                 for (int i = 0; i < selectableButtons.Count; i++)
@@ -229,11 +230,11 @@ public class SelectManager : NetworkBehaviour
 
             timer = TickTimer.None;
 
-            //½Ã°£ Á¾·á ½Ã ¾À ÀÌµ¿
+            //ì‹œê°„ ì¢…ë£Œ ì‹œ ì”¬ ì´ë™
             ClientSceneManager.instance.GoGameMap("SampleScene");
         }
     }
-    //ÇöÀç ÇÃ·¹ÀÌ¾î ¸ñ·ÏÀ» Á¤·ÄÇÏ´Â ÄÚ·çÆ¾
+    //í˜„ì¬ í”Œë ˆì´ì–´ ëª©ë¡ì„ ì •ë ¬í•˜ëŠ” ì½”ë£¨í‹´
     IEnumerator SortingDelay(NetworkObject obj)
     {
         yield return new WaitForSeconds(2f);
