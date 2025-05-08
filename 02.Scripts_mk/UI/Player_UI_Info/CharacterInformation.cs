@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//캐릭터 선택창의 캐릭터 설명에 관한 UI
 public class CharacterInformation : MonoBehaviour
 {
     public TextMeshProUGUI position;
