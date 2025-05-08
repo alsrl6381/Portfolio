@@ -7,15 +7,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+//ê²Œì„ ì‹œì‘ ì‹œ ì”¬ì„ ì´ë™í•˜ê³  ëª¨ë“  ìœ ì €ì˜ ì”¬ ë™ê¸°í™”ë¥¼ ë§ì¶”ëŠ” ë§¤ë‹ˆì €
 public class ClientSceneManager : MonoBehaviour
 {
-    //½Ì±ÛÅæ | ·Îµù ÆĞ³Î | ÁøÇà ¹Ù
+    //ì‹±ê¸€í†¤ | ë¡œë”© íŒ¨ë„ | ì§„í–‰ ë°”
     public static ClientSceneManager instance;
     public GameObject loadingScreen;
     public Slider progressBar;
     public TextMeshProUGUI loadingCount;
 
-    //¾À ÀÌ¸§ º¯¼ö ÁöÁ¤
+    //ì”¬ ì´ë¦„ ë³€ìˆ˜ ì§€ì •
     const string RedTeamSceneName = "RedTeam";
     const string BlueTeamSceneName = "BlueTeam";
     const string StageSceneName = "StageScene";
@@ -39,7 +41,7 @@ public class ClientSceneManager : MonoBehaviour
         }
     }
 
-    #region ¼±ÅÃ ¾ÀÀ¸·Î °¡±â
+    #region ì„ íƒ ì”¬ìœ¼ë¡œ ê°€ê¸°
     public void GoSelectScene(UserData player)
     {
         string name = SeparateScene(player);
@@ -68,7 +70,7 @@ public class ClientSceneManager : MonoBehaviour
 
     #endregion
 
-    #region °ÔÀÓ ¸Ê ¾ÀÀ¸·Î ÀÌµ¿
+    #region ê²Œì„ ë§µ ì”¬ìœ¼ë¡œ ì´ë™
     public void GoGameMap(string _sceneName)
     {
         StartCoroutine(SettingGameMap(_sceneName));
@@ -90,7 +92,7 @@ public class ClientSceneManager : MonoBehaviour
 
     #endregion
 
-    //¾À ÀÌµ¿
+    //ì”¬ ì´ë™
     IEnumerator LoadNextScene(string _sceneName)
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(_sceneName);
