@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//ìƒˆë¡œ ê³ ì¹¨ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì„¸ì…˜ ë¦¬ìŠ¤íŠ¸ë¥¼ ì´ˆê¸°í™” í•˜ëŠ” ê¸°ëŠ¥
 public class RefreshButton : MonoBehaviour
 {
-    //»õ·Î°íÄ§ ¹öÆ°
+    //ìƒˆë¡œê³ ì¹¨ ë²„íŠ¼
     public Button refreshButton;
 
     private void Start()
@@ -18,14 +19,14 @@ public class RefreshButton : MonoBehaviour
     }
 
 
-    //»õ·Î °íÄ§ ±â´É
+    //ìƒˆë¡œ ê³ ì¹¨ ê¸°ëŠ¥
     public void Refresh()
     {
         StartCoroutine(RefreshWait());
         Debug.Log("Refresh");
     }
 
-    //»õ·Î °íÄ§À» ´©¸£°í ³ª¼­ interative¸¦ Á¶ÀıÇÏ¿© ¹İº¹ÀûÀ¸·Î ´©¸¦ ¼ö ¾ø°Ô ¸¸µë
+    //ìƒˆë¡œ ê³ ì¹¨ì„ ëˆ„ë¥´ê³  ë‚˜ì„œ interativeë¥¼ ì¡°ì ˆí•˜ì—¬ ë°˜ë³µì ìœ¼ë¡œ ëˆ„ë¥¼ ìˆ˜ ì—†ê²Œ ë§Œë“¬
     private IEnumerator RefreshWait()
     {
         refreshButton.interactable = false;
