@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//인게임에서 아이템 구매 시 이미지나 돈들을 동기화 시키고 화면에 보이게하는 UI
 public class CrNetworkData : NetworkBehaviour
 {
     [SerializeField] private Sprite[] RedPortrait;
