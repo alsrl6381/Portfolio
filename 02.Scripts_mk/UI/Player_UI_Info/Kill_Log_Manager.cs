@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//킬 로그가 일정 개수를 유지하도록 하는 킬 로그 매니저
 public class Kill_Log_Manager : MonoBehaviour
 {
     public List<Kill_Log> Logs = new List<Kill_Log>();
