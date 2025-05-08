@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//네트워크 환경에서 입력 구조체의 제약을 지키기 위해서 직접 키 입력과 그에 따른 맵핑을 해주는 기능
 public enum EInputButtons
 {
     Jump = 0,
