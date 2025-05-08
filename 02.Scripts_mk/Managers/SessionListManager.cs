@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
 
-//플레이어가 방을 만들거나 조인 했을 때 생기는 방의 변화(세션)을 관리하는 매니저
+//플레이어가 게임 방을 만들었을 때 생기는 룸 데이터들을 관리하는 매니저
 public class SessionListManager : MonoBehaviour
 {
     //sessionList관련 UI 및 sessionInfo에 대한 정보를 받을 List   
