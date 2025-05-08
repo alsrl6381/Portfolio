@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//ìºë¦­í„° ì„ íƒ ì°½ì—ì„œ ìºë¦­í„° í´ë¦­ ì‹œ ì‘ë™í•˜ëŠ” ê¸°ëŠ¥
 public class CharacterClick : MonoBehaviour
 {
     SelectManager selectManager;
@@ -23,7 +24,7 @@ public class CharacterClick : MonoBehaviour
         StartCoroutine(Init());
     }
 
-    //Ä³¸¯ÅÍ ¼±ÅÃ ¾À¿¡¼­ ¹öÆ°À» ÃÊ±âÈ­ ÇÔ | ÀÌ ¶§ ¹öÆ°¿¡ ±â´ÉÀ» Ãß°¡ ÇÔ
+    //ìºë¦­í„° ì„ íƒ ì”¬ì—ì„œ ë²„íŠ¼ì„ ì´ˆê¸°í™” í•¨ | ì´ ë•Œ ë²„íŠ¼ì— ê¸°ëŠ¥ì„ ì¶”ê°€ í•¨
     IEnumerator Init()
     {
         yield return new WaitForSeconds(3f);
