@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//킬,점수,총알 등 1인칭으로 화면에서 보이는 UI들을 관리하는 매니저
 public class GUI_Manager : MonoBehaviour
 {
     public List<Transform> UIList = new List<Transform>();
