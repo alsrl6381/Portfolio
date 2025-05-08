@@ -6,14 +6,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//ë¼ìš´ë“œì™€ ìŠ¹ì ì„ ê´€ë¦¬ í•˜ëŠ” ë§¤ë‹ˆì €
 public class RoundManager : NetworkBehaviour
 {
     private static RoundManager instance;
 
-    public bool isReady;//ÁØºñ ¶ó¿îµå´Ï?
-    public bool isPlaying; // ÀÎ°ÔÀÓ ¶ó¿îµå´Ï?
-    public bool isBomb; //ÆøÅº ¼³Ä¡ µÆ´Ï?
-    public bool isOver;//¶ó¿îµå ³¡³µ´Ï?
+    public bool isReady;//ì¤€ë¹„ ë¼ìš´ë“œë‹ˆ?
+    public bool isPlaying; // ì¸ê²Œì„ ë¼ìš´ë“œë‹ˆ?
+    public bool isBomb; //í­íƒ„ ì„¤ì¹˜ ëë‹ˆ?
+    public bool isOver;//ë¼ìš´ë“œ ëë‚¬ë‹ˆ?
     public bool isSpawned;
 
     [SerializeField] private GameObject timerPrefab;
@@ -41,7 +42,7 @@ public class RoundManager : NetworkBehaviour
 
     private ReadyWall[] wall = new ReadyWall[2];
 
-    public static RoundManager Instance //½Ì±ÛÅæ 
+    public static RoundManager Instance //ì‹±ê¸€í†¤ 
     {
         get
         {
@@ -76,12 +77,12 @@ public class RoundManager : NetworkBehaviour
 
     public void GameResult()
     {
-        //½Ã°£ ¾È¿¡ ¸ÕÀú ´Ù Á×Àº ÆÀ ÆĞ¹è
-        //½Ã°£ ¾È¿¡ ´Ù ¸øÀâÀ¸¸é ·¹µåÆÀ ÆĞ¹è
+        //ì‹œê°„ ì•ˆì— ë¨¼ì € ë‹¤ ì£½ì€ íŒ€ íŒ¨ë°°
+        //ì‹œê°„ ì•ˆì— ë‹¤ ëª»ì¡ìœ¼ë©´ ë ˆë“œíŒ€ íŒ¨ë°°
 
-        //ÆøÅºÀÌ ¼³Ä¡µÇ¸é ½Ã°£ÀÌ ¸ØÃã
-        //ÆøÅºÀ» ÆøÆÄ½ÃÅ°¸é ·¹µåÆÀ ½Â¸®
-        //ÆøÅºÀ» ÇØÁ¦½ÃÅ°¸é ºí·çÆÀ ½Â¸®
+        //í­íƒ„ì´ ì„¤ì¹˜ë˜ë©´ ì‹œê°„ì´ ë©ˆì¶¤
+        //í­íƒ„ì„ í­íŒŒì‹œí‚¤ë©´ ë ˆë“œíŒ€ ìŠ¹ë¦¬
+        //í­íƒ„ì„ í•´ì œì‹œí‚¤ë©´ ë¸”ë£¨íŒ€ ìŠ¹ë¦¬
 
         isRedAllDead = true;
 
@@ -104,7 +105,7 @@ public class RoundManager : NetworkBehaviour
         }
 
        
-        //ºí·ç ÆÀÀÌ ´Ù Á×¾ú´Ù¸é ·¹µåÆÀ ½Â¸®
+        //ë¸”ë£¨ íŒ€ì´ ë‹¤ ì£½ì—ˆë‹¤ë©´ ë ˆë“œíŒ€ ìŠ¹ë¦¬
         if (isBlueAllDead == true)
         {
             RedWin();
@@ -114,7 +115,7 @@ public class RoundManager : NetworkBehaviour
 
         if (isBomb == true) return;
 
-        //·¹µå ÆÀÀÌ ´Ù Á×¾ú´Ù¸é ºí·çÆÀ ½Â¸® 
+        //ë ˆë“œ íŒ€ì´ ë‹¤ ì£½ì—ˆë‹¤ë©´ ë¸”ë£¨íŒ€ ìŠ¹ë¦¬ 
         if (isRedAllDead == true)
         {
             BlueWin();
@@ -193,7 +194,7 @@ public class RoundManager : NetworkBehaviour
         wall[1].ReadyWallOff();
     }
 
-    //¶ó¿îµå Àç½ÃÀÛ ÇÒ ¶§¸¶´Ù ½ÇÇà / Ã³À½¿¡´Â ½ÇÇà ¾ÈÇÔ
+    //ë¼ìš´ë“œ ì¬ì‹œì‘ í•  ë•Œë§ˆë‹¤ ì‹¤í–‰ / ì²˜ìŒì—ëŠ” ì‹¤í–‰ ì•ˆí•¨
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(RoundRestart());
@@ -231,7 +232,7 @@ public class RoundManager : NetworkBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void RoundOver() //¶ó¿îµå°¡ ³¡³ª¸é ¶È°°Àº ¾ÀÀ¸·Î ÃÊ±âÈ­ ÇØÁÖ´Â ÇÔ¼ö
+    public void RoundOver() //ë¼ìš´ë“œê°€ ëë‚˜ë©´ ë˜‘ê°™ì€ ì”¬ìœ¼ë¡œ ì´ˆê¸°í™” í•´ì£¼ëŠ” í•¨ìˆ˜
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
