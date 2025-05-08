@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//음성 대화를 할 수 있게 하는 기능
 public class PushToTalk : NetworkBehaviour
 {
     private Recorder recorder;
